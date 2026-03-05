@@ -52,8 +52,22 @@ platform_do_upgrade() {
 		fw_setenv owrt_slotactive $((1 - active))
 		nand_do_upgrade "$1"
 		;;
+	jdcloud,ap-cp03-c1)
+		CI_KERNPART="0:HLOS"
+		CI_ROOTPART="rootfs"
+		CI_DATAPART="rootfs_data"
+		emmc_do_upgrade "$1"
+		;;
 	*)
 		default_do_upgrade "$1"
+		;;
+	esac
+}
+
+platform_copy_config() {
+	case "$(board_name)" in
+	jdcloud,ap-cp03-c1)
+		emmc_copy_config
 		;;
 	esac
 }

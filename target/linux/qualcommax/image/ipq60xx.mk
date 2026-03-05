@@ -52,3 +52,18 @@ define Device/yuncore_fap650
 endef
 TARGET_DEVICES += yuncore_fap650
 
+define Device/jdcloud_ap-cp03-c1
+       $(call Device/FitImage)
+       $(call Device/EmmcImage)
+       DEVICE_VENDOR := JDCloud
+       DEVICE_MODEL := AX1800 Pro
+       DEVICE_VARIANT := AP-CP03-C1
+       DEVICE_DTS_CONFIG := config@cp03-c1
+       SOC := ipq6018
+       KERNEL_SIZE := 6144k
+       IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-rootfs | pad-rootfs
+       DEVICE_PACKAGES := ipq-wifi-yuncore_fap650
+       SUPPORTED_DEVICES += ap-cp03-c1
+endef
+TARGET_DEVICES += jdcloud_ap-cp03-c1
+

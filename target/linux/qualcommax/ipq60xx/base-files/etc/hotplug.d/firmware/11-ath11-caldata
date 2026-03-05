@@ -15,6 +15,13 @@ case "$FIRMWARE" in
 	cambiumnetworks,xe3-4)
 		caldata_extract "0:ART" 0x1000 0x10000
 		;;
+	jdcloud,ap-cp03-c1)
+		if [ -n "$(find_mmc_part 0:ART)" ]; then
+			caldata_extract_mmc "0:ART" 0x20000 0x10000
+		else
+			caldata_extract "0:art" 0x20000 0x10000
+		fi
+		;;
 	netgear,wax214)
 		caldata_extract "0:art" 0x1000 0x10000
 		;;
